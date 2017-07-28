@@ -1,11 +1,12 @@
 import { IStore } from 'redux/IStore';
 import * as React from 'react';
-import * as Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
+import * as serialize from 'serialize-javascript';
 
 interface IHtmlProps {
-  manifest?: Object;
-  markup?: string;
-  store?: Redux.Store<IStore>;
+  manifest?: any;
+  markup: string;
+  store: Redux.Store<IStore>;
 }
 
 class Html extends React.Component<IHtmlProps, {}> {
@@ -31,7 +32,10 @@ class Html extends React.Component<IHtmlProps, {}> {
     );
 
     // tslint:disable-next-line:max-line-length
-    const initialState = (<script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />);
+    const initialState = (
+      <script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${serialize(store.getState(), { isJSON: true })};` }}
+              charSet="UTF-8" />
+    );
 
     return (
       <html>
