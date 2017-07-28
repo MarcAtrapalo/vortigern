@@ -10,15 +10,7 @@ interface IProps {
   getStars: Redux.ActionCreator<IStarsAction>;
 }
 
-@asyncConnect([{
-  promise: ({ store: { dispatch } }) => {
-    return dispatch(getStars());
-  },
-}])
-@connect(
-  (state) => ({ stars: state.stars }),
-)
-class Stars extends React.Component<IProps, {}> {
+class StarsContainer extends React.Component<IProps, {}> {
   public render() {
     const { stars } = this.props;
 
@@ -30,4 +22,12 @@ class Stars extends React.Component<IProps, {}> {
   }
 }
 
-export { Stars }
+const StarsConnected = connect(
+  (state) => ({ stars: state.stars }),
+)(StarsContainer);
+
+export const Stars = asyncConnect([{
+  promise: ({ store: { dispatch } }) => {
+    return dispatch(getStars());
+  },
+}])(StarsConnected);

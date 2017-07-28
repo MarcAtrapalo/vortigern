@@ -23,9 +23,13 @@ export function configureStore(history, initialState?: IStore): Redux.Store<ISto
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-  const store: Redux.Store<IStore> = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middlewares),
-  ));
+  const store: Redux.Store<IStore> = initialState ?
+    createStore(rootReducer, initialState, composeEnhancers(
+      applyMiddleware(...middlewares),
+    )) :
+    createStore(rootReducer, composeEnhancers(
+      applyMiddleware(...middlewares),
+    ));
 
   if (appConfig.env === 'development' && (module as any).hot) {
     (module as any).hot.accept('./reducers', () => {

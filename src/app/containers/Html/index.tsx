@@ -5,8 +5,8 @@ import * as serialize from 'serialize-javascript';
 
 interface IHtmlProps {
   manifest?: any;
-  markup?: string;
-  store?: Redux.Store<IStore>;
+  markup: string;
+  store: Redux.Store<IStore>;
 }
 
 class Html extends React.Component<IHtmlProps, {}> {

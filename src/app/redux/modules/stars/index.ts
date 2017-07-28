@@ -1,9 +1,9 @@
 import { IStars, IStarsAction } from 'models/stars';
 
 /** Action Types */
-export const GET_REQUEST: string = 'stars/GET_REQUEST';
-export const GET_SUCCESS: string = 'stars/GET_SUCCESS';
-export const GET_FAILURE: string = 'stars/GET_FAILURE';
+export const GET_REQUEST = 'stars/GET_REQUEST';
+export const GET_SUCCESS = 'stars/GET_SUCCESS';
+export const GET_FAILURE = 'stars/GET_FAILURE';
 
 /** Initial State */
 const initialState: IStars = {
@@ -42,12 +42,12 @@ export function getStars() {
     dispatch(starsRequest());
 
     return fetch('https://api.github.com/repos/barbar/vortigern')
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json()
             .then((res) => dispatch(starsSuccess(res.stargazers_count)));
         } else {
-          return res.json()
+          return resp.json()
             .then((res) => dispatch(starsFailure(res)));
         }
       })
@@ -59,6 +59,7 @@ export function getStars() {
 export function starsRequest(): IStarsAction {
   return {
     type: GET_REQUEST,
+    payload: {},
   };
 }
 

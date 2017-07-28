@@ -11,15 +11,7 @@ interface IProps {
   decrement: Redux.ActionCreator<ICounterAction>;
 }
 
-@connect(
-  (state) => ({ counter: state.counter }),
-  (dispatch) => ({
-    decrement: () => dispatch(decrement()),
-    increment: () => dispatch(increment()),
-  }),
-)
-
-class Counter extends React.Component<IProps, {}> {
+class CounterContainer extends React.Component<IProps, {}> {
   public render() {
     const { increment, decrement, counter } = this.props;
 
@@ -43,4 +35,10 @@ class Counter extends React.Component<IProps, {}> {
   }
 }
 
-export { Counter }
+export const Counter = connect(
+  (state) => ({ counter: state.counter }),
+  (dispatch) => ({
+    decrement: () => dispatch(decrement()),
+    increment: () => dispatch(increment()),
+  }),
+)(CounterContainer);

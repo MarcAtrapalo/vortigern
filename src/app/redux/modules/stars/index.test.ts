@@ -33,7 +33,7 @@ describe('Stars Module', () => {
         });
 
         const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
+          { type: stars.GET_REQUEST, payload: {} },
           { type: stars.GET_SUCCESS, payload: { count: githubResponse.stargazers_count } },
         ];
 
@@ -54,7 +54,7 @@ describe('Stars Module', () => {
         });
 
         const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
+          { type: stars.GET_REQUEST, payload: {} },
           { type: stars.GET_FAILURE, payload: { message: errResponse } },
         ];
 

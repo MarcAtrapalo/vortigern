@@ -7,7 +7,7 @@ export interface IStars {
 
 export interface IStarsAction {
   type: string;
-  payload?: {
+  payload: {
     count?: number;
     message?: any;
   };
